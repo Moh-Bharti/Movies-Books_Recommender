@@ -3,6 +3,7 @@ import sklearn as sk
 import json
 import re
 import numpy as np
+import csv
 import matplotlib.pyplot as plt
 
 def parser1(filename):
@@ -108,26 +109,56 @@ def genre_parser(string):
     #print(np.shape(arr))
     return arr
 def parser2(filename):
-    arr=0
-    return arr
+    arr = []
+    with open(filename)as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        for row in csv_reader:
+            rating = (row[2])
+            arr.append(rating)
+            isbn = (row[0])
+    rate = np.zeros((11,1))
+    for i in range(1,len(arr)):
+
+        a = arr[i]
+        if a!='':
+            rate[int(a),:]+=1
+    return rate
 if __name__=='__main__':
     books_tags="book_tags.csv"
     books="books.csv"
     movie="movies_metadata.csv"
     movie_rating="movie_ratings.csv"
-    book_rating="ratings.csv"
-    rat,gen = parser1(movie)
+    book_rating="book_rating_data.csv"
+    book_rating= parser2(book_rating)
+    plt.plot(book_rating)
+    plt.xlabel("ratings in the range of 0-10")
+    plt.ylabel("Frequency of the movies in the given range")
+    plt.text(8.5, 600000, "No. of books are 120K", style='oblique', color='green')
+    plt.show()
+    #print(book_rating)
+    '''''rat,gen = parser1(movie)
     gen1 = np.zeros((len(gen[0]),1))
     for i in range(len(gen[0])):
         gen1[i]=np.sum(gen[:,i])
     x =np.array([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16])
     plt.figure(1)
 
-    '''plt.xticks(x,['Action','Adven.','Anim.','Comedy','Crime','Docu.','Drama','Family','Fantasy','Hist.','Horror','Music','Mystery','Romance','SciFi','Thriller','War'])
+    plt.xticks(x,['Action','Adven.','Anim.','Comedy','Crime','Docu.','Drama','Family','Fantasy','Hist.','Horror','Music','Mystery','Romance','SciFi','Thriller','War'])
     plt.plot(gen1)
-    plt.xlabel("genre")
-    plt.ylabel("no. of movies")'''
+    plt.xlabel("genre",fontdict={'family': 'serif',
+        'color':  'darkred',
+        'weight': 'normal',
+        'size': 12,
+        })
+    plt.ylabel("no. of movies",fontdict={'family': 'serif',
+        'color':  'red',
+        'weight': 'normal',
+        'size': 12,
+        })
+    plt.text(14, 18900, "No. of movies are 45K", style='oblique', color='green')
 
     plt.plot(rat)
-    plt.xlabel()
-    plt.show()
+    plt.xlabel("ratings in the range of 1-10")
+    plt.ylabel("Frequency of the movies in the given range")
+    plt.text(8.5,13900,"No. of movies are 45K",style='oblique',color='green')
+    plt.show()'''''
