@@ -6,6 +6,16 @@ import numpy as np
 import csv
 import matplotlib.pyplot as plt
 
+def info(filename):
+    arr = pd.read_csv(filename).to_numpy()
+    id = arr[:, 5]
+    title = arr[:, 8]
+    pop = arr[:, 10]
+    year = arr[:, 14]
+    rtime = arr[:, 16]
+
+    return id,title,pop,year,rtime
+
 def parser1(filename):
     arr = pd.read_csv(filename).to_numpy()
     genre = arr[:,3]
@@ -13,11 +23,7 @@ def parser1(filename):
     genre_movie=genre_parser(genre_json)
 
     #genre_dict=json.loads(genre_json)
-    id = arr[:,5]
-    title = arr[:,8]
-    pop = arr[:,10]
-    year = arr[:,14]
-    rtime = arr[:,16]
+
     rating = arr[:,22]
     array = rating_calc(rating)
     return array,genre_movie
