@@ -12,9 +12,14 @@ def info(filename):
     title = arr[:, 8]
     pop = arr[:, 10]
     year = arr[:, 14]
-    rtime = arr[:, 16]
+    year1 = np.zeros((len(year),1))
+    for i in range(len(year)):
 
-    return id,title,pop,year,rtime
+        year1[i] = int(year[i][-4:])
+    rtime = arr[:, 16]
+    ad = arr[:,0]
+
+    return ad,id,title,pop,year1,rtime
 
 def parser1(filename):
     arr = pd.read_csv(filename).to_numpy()
@@ -66,7 +71,7 @@ def rating_calc(arr):
             rat[10]+=1
             array[i]=5
 
-    return rat
+    return array
 def genre_parser(string):
     n = len(string)
     arr = np.zeros((n,17))
