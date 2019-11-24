@@ -2,6 +2,9 @@ import numpy as np
 import scipy as sp
 from sklearn import linear_model
 import Dataset_parser as dp
+
+
+
 #import tensorflow
 movie="movies_metadata.csv"
 book_rating="book_rating_data.csv"
@@ -71,7 +74,7 @@ if __name__=='__main__':
 
     warnings.filterwarnings("ignore")
 
-    """a, b, c, d, e, f = dp.info(movie)
+    a, b, c, d, e, f = dp.info(movie)
     mr, mg = dp.parser1(movie)
     movies = []
     while(True):
@@ -91,4 +94,4 @@ if __name__=='__main__':
                 movies.append(list(set(q+p)))
 
     print(movies)
-    print(np.shape(movies))"""
+    print(np.shape(movies))
